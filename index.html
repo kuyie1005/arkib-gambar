@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Gambar Rasmi PPD Bera & Sekolah</title>
+    <!-- Memuatkan Tailwind CSS untuk reka bentuk yang moden -->
+    <script src="https://jsdelivr.net"></script>
+    <!-- Memuatkan Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        .gallery-item img {
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- NAVIGASI UTAMA -->
+    <nav class="bg-blue-900 text-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-2 rounded-full w-10 h-10 flex items-center justify-center text-blue-900 font-bold text-lg shadow">
+                    B
+                </div>
+                <div>
+                    <h1 class="font-bold text-base md:text-lg tracking-wide leading-tight">PORTAL GAMBAR RASMI</h1>
+                    <p class="text-xs text-blue-200">PPD Bera & Sekolah-Sekolah Daerah Bera</p>
+                </div>
+            </div>
+            <div class="mt-2 md:mt-0 flex items-center space-x-2 w-full md:w-auto">
+                <div class="relative w-full">
+                    <input type="text" id="searchBar" placeholder="Cari aktiviti atau nama sekolah..." class="w-full bg-blue-800 text-white placeholder-blue-300 text-sm rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <span class="absolute left-3 top-2.5 text-blue-300 text-sm"><i class="fas fa-search"></i></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-12 px-4 shadow-inner text-center">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-blue-500 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Galeri Media Digital</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold mt-3 leading-tight">Koleksi Lensa Aktiviti PPD Bera</h2>
+            <p class="mt-4 text-blue-100 text-sm md:text-base leading-relaxed">
+                Platform storan dan paparan gambar rasmi bagi program-program anjuran Pejabat Pendidikan Daerah Bera serta aktiviti-aktiviti utama sekolah-sekolah di Daerah Bera.
+            </p>
+        </div>
+    </header>
+
+    <!-- UTAMA & PENAPIS (FILTERS) -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Butang Penapis Kategori -->
+        <div class="flex flex-wrap justify-center gap-2 mb-8" id="filterButtons">
+            <button onclick="filterGallery('semua')" class="filter-btn active bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-blue-700 cursor-pointer">
+                Semua Gambar
+            </button>
+            <button onclick="filterGallery('ppd')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
+                Aktiviti PPD Bera
+            </button>
+            <button onclick="filterGallery('menengah')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
+                Sekolah Menengah
+            </button>
+            <button onclick="filterGallery('rendah')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
+                Sekolah Rendah
+            </button>
+        </div>
+
+        <!-- STATS / PANDUAN RINGKAS -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-center">
+            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
+                <span class="block text-2xl font-bold text-blue-900" id="countSemua">0</span>
+                <span class="text-xs text-gray-500 uppercase font-medium">Jumlah Gambar</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
+                <span class="block text-2xl font-bold text-indigo-800" id="countPpd">0</span>
+                <span class="text-xs text-gray-500 uppercase font-medium">Program PPD</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
+                <span class="block text-2xl font-bold text-purple-800" id="countMenengah">0</span>
+                <span class="text-xs text-gray-500 uppercase font-medium">Sek. Menengah</span>
+            </div>
+            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
+                <span class="block text-2xl font-bold text-teal-800" id="countRendah">0</span>
+                <span class="text-xs text-gray-500 uppercase font-medium">Sek. Rendah</span>
+            </div>
+        </div>
+
+        <!-- GRID GALERI GAMBAR -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galleryGrid">
+            <!-- Gambar akan dimasukkan secara dinamik menggunakan JavaScript di bawah -->
+        </div>
+
+        <!-- Mesej Jika Tiada Carian Ditemui -->
+        <div id="noResult" class="hidden text-center py-12">
+            <i class="fas fa-image text-4xl text-gray-300 mb-3"></i>
+            <p class="text-gray-500">Tiada gambar atau sekolah yang sepadan dengan carian anda.</p>
+        </div>
+    </main>
+
+    <!-- LIGHTBOX / MODAL PAPARAN GAMBAR BESAR -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex flex-col justify-center items-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 cursor-pointer">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="max-w-4xl max-h-[80vh] flex justify-center items-center">
+            <img id="lightboxImg" src="" alt="Paparan Besar" class="max-w-full max-h-[75vh] object-contain rounded shadow-2xl">
+        </div>
+        <div class="text-center mt-4 text-white max-w-2xl px-4">
+            <h3 id="lightboxTitle" class="text-lg font-bold"></h3>
+            <p id="lightboxDesc" class="text-sm text-gray-300 mt-1"></p>
+            <div class="mt-3 flex justify-center gap-2">
+                <span id="lightboxTag" class="text-xs bg-blue-600 px-3 py-1 rounded-full"></span>
+                <span id="lightboxDate" class="text-xs bg-gray-700 px-3 py-1 rounded-full text-gray-300"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-12 border-t border-gray-800 text-xs">
+        <p>&copy; 2026 Portal Media Digital PPD Bera. Hak Cipta Terpelihara.</p>
+        <p class="mt-1 text-gray-600">Dikembangkan untuk tujuan pengurusan gambar rasmi dan arkib program pendidikan.</p>
+    </footer>
+
+    <!-- JAVASCRIPT: DATA & LOGIK PORTAL -->
+    <script>
+        // DATA CONTOH: Sila gantikan URL 'src' dengan link gambar sebenar anda
+        const galleryData = [
+            {
+                id: 1,
+                title: "KARNIVAL STEM DAERAH BERA 2025",
+                desc: 
+                category: "ppd",
+                schoolName: "PPD Bera",
+                date: "9 Jul 2025",
+                src: "https://photos.app.goo.gl/HMQxfzee19XXu7Qw8"
+            },
+            {
+                id: 2,
+                title: "Program Transformasi Minda PPD Bera",
+                desc: "Kursus peningkatan profesionalisme kepimpinan sekolah anjuran Sektor Pengurusan Sekolah.",
+                category: "ppd",
+                schoolName: "PPD Bera",
+                date: "05 Okt 2026",
+                src: "https://unsplash.com"
+            },
+            {
+                id: 3,
+                title: "Karnival Sukan & Kejohanan Olahraga",
+                desc: "Kemeriahan kontinjen atlet SMK Bandar Kerayong semasa acara perbarisan pembukaan kejohanan.",
+                category: "menengah",
+                schoolName: "SMK Bandar Kerayong",
+                date: "28 Sep 2026",
+                src: "https://unsplash.com"
+            },
+            {
+                id: 4,
+                title: "Pelancaran Bulan Kebangsaan Peringkat Sekolah",
+                desc: "Murid-murid SK Mengkarak mengibarkan Jalur Gemilang dengan penuh semangat patriotik.",
+                category: "rendah",
+                schoolName: "SK Mengkarak",
+                date: "15 Ogos 2026",
+                src: "https://unsplash.com"
+            },
+            {
+                id: 5,
+                title: "Projek Inovasi STEM Peringkat Daerah",
+                desc: "Pelajar SMK Triang mempamerkan projek robotik mesra alam kepada barisan panel hakim PPD.",
+                category: "menengah",
+                schoolName: "SMK Triang",
+                date: "03 Sep 2026",
+                src: "https://unsplash.com"
+            },
+            {
+                id: 6,
+                title: "Program Jom Ke Sekolah & Amalan Guru Penyayang",
