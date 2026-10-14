@@ -3,168 +3,373 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Galeri Foto PPD Bera</title>
-    <!-- Tailwind CSS Versi Stabil Alternatif -->
-<script src="https://unpkg.com"></script>
-<!-- Ikon Alternatif -->
-<link rel="stylesheet" href="https://unpkg.com">
+    <title>Portal Gambar Rasmi PPD Bera & Sekolah</title>
+    
+    <style>
+        /* REKA BENTUK ASAS & WARNA (BEBAS INTERNET) */
+        :root {
+            --primary: #0f172a;       /* Biru Gelap Korporat */
+            --accent: #2563eb;        /* Biru Sektor */
+            --accent-hover: #1d4ed8;
+            --bg-light: #f8fafc;      /* Latar Belakang Laman */
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        /* NAVIGASI UTAMA */
+        nav {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-w: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            background-color: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-title h1 {
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-title p {
+            font-size: 11px;
+            color: #93c5fd;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background-color: #1e293b;
+            color: white;
+            font-size: 14px;
+        }
+
+        .search-box input:focus {
+            outline: 2px solid #60a5fa;
+        }
+
+        /* HERO UTAMA */
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background-color: #3b82f6;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: #bfdbfe;
+            font-size: 14px;
+        }
+
+        /* BUTANG PENAPIS (FILTER) */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background-color: white;
+            color: #475569;
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background-color: #f1f5f9;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent);
+            color: white;
+            border-color: var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+
+        /* SUSUNAN GRID KAD */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .card-img-area {
+            height: 180px;
+            background-color: #e2e8f0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .card-img-area img {
+            width: 100%;
+            height: 100%;
+            object-cover: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-ppd { background-color: #dbeafe; color: #1e40af; }
+        .badge-menengah { background-color: #f3e8ff; color: #6b21a8; }
+        .badge-rendah { background-color: #ccfbf1; color: #115e59; }
+
+        .card-body {
+            padding: 16px;
+        }
+
+        .card-school {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            padding: 12px 16px;
+            border-top: 1px solid #f1f5f9;
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .view-link {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* TIADA HASIL */
+        .no-result {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+        }
+
+        /* LIGHTBOX PAPARAN BESAR */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .lightbox-content {
+            max-width: 800px;
+            max-height: 70vh;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .lightbox-caption {
+            text-align: center;
+            color: white;
+            margin-top: 15px;
+            max-width: 600px;
+        }
+
+        .lightbox-caption h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .lightbox-caption p {
+            font-size: 13px;
+            color: #cbd5e1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            font-size: 11px;
+            color: var(--text-muted);
+            background-color: #fff;
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+        }
+    </style>
 </head>
-<body class="bg-slate-900 text-slate-100 font-sans antialiased">
+<body>
 
-    <!-- HEADER / HERO -->
-    <header class="relative bg-slate-950 border-b border-slate-800 py-16 px-6 text-center overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
-        <div class="relative max-w-3xl mx-auto">
-            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-xs font-semibold mb-4 tracking-wider uppercase">
-                <i class="fas fa-camera"></i> Lensa Digital Pendidikan
+    <nav>
+        <div class="nav-container">
+            <div class="logo-area">
+                <div class="logo-circle">B</div>
+                <div class="logo-title">
+                    <h1>PORTAL GAMBAR RASMI</h1>
+                    <p>PPD Bera & Sekolah-Sekolah Daerah Bera</p>
+                </div>
             </div>
-            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">
-                PORTAL GAMBAR RASMI <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">PPD BERA</span>
-            </h1>
-            <p class="mt-4 text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
-                Arkib visual digital memaparkan koleksi foto aktiviti Pejabat Pendidikan Daerah Bera dan sekolah-sekolah cemerlang sekitarnya.
-            </p>
+            <div class="search-box">
+                <input type="text" id="searchBar" placeholder="Cari program atau sekolah...">
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-container">
+            <span class="badge">Arkib Visual Statik</span>
+            <h2>Koleksi Lensa Aktiviti PPD Bera</h2>
+            <p>Platform storan gambar rasmi program anjuran Pejabat Pendidikan Daerah Bera serta aktiviti utama sekolah sekitar daerah Bera.</p>
         </div>
     </header>
 
-    <!-- SEARCH & FILTER BAR -->
-    <section class="max-w-6xl mx-auto px-4 mt-8">
-        <div class="bg-slate-950/50 p-4 rounded-2xl border border-slate-800 flex flex-col md:flex-row gap-4 justify-between items-center backdrop-blur-md">
-            
-            <!-- Carian -->
-            <div class="relative w-full md:w-80">
-                <input type="text" id="searchBar" placeholder="Cari program atau sekolah..." class="w-full bg-slate-900 text-slate-200 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition">
-                <i class="fas fa-search absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
-            </div>
-
-            <!-- Butang Filter Menu -->
-            <div class="flex flex-wrap gap-1.5 w-full md:w-auto" id="filterButtons">
-                <button onclick="filterGallery('semua')" class="filter-btn active bg-amber-500 text-slate-950 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg shadow-amber-500/20 transition cursor-pointer">Semua</button>
-                <button onclick="filterGallery('ppd')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">PPD Bera</button>
-                <button onclick="filterGallery('menengah')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">S. Menengah</button>
-                <button onclick="filterGallery('rendah')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">S. Rendah</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- MAIN GRID CONTAINER -->
-    <main class="max-w-6xl mx-auto px-4 py-10">
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
-            <!-- Gambar akan dijana secara automatik oleh JS -->
-        </div>
-
-        <!-- Tiada Hasil Carian -->
-        <div id="noResult" class="hidden text-center py-20 border border-dashed border-slate-800 rounded-2xl">
-            <i class="fas fa-folder-open text-4xl text-slate-700 mb-3"></i>
-            <p class="text-slate-500 text-sm">Tiada rekod foto atau sekolah yang sepadan ditemui.</p>
-        </div>
-    </main>
-
-    <!-- LIGHTBOX / PAPARAN BESAR -->
-    <div id="lightbox" class="fixed inset-0 bg-slate-950/95 z-50 hidden flex flex-col justify-center items-center p-4 backdrop-blur-sm">
-        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-2xl transition cursor-pointer">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="max-w-4xl max-h-[75vh]">
-            <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl border border-slate-800">
-        </div>
-        <div class="text-center mt-6 max-w-xl px-4">
-            <span id="lightboxTag" class="text-[10px] bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider"></span>
-            <h3 id="lightboxTitle" class="text-xl font-bold text-white mt-2"></h3>
-            <p id="lightboxDesc" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
-            <div class="mt-4 text-[10px] text-slate-500">
-                <i class="far fa-calendar-alt mr-1"></i> Tarikh Program: <span id="lightboxDate" class="text-slate-400"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-850 bg-slate-950/60 py-8 text-center text-xs text-slate-600">
-        <p>&copy; 2026 Portal Lensa Media PPD Bera. Hak Cipta Terpelihara.</p>
-    </footer>
-
-    <!-- JAVASCRIPT LOGIK -->
-    <script>
-        // DATA UTAMA GAMBAR (Boleh diubah mengikut keperluan anda)
-        const galleryData = [
-            {
-                id: 1,
-                title: "Majlis Anugerah Kecemerlangan PPD Bera",
-                desc: "Penyerahan sijil dan trofi penghargaan kepada barisan sekolah berprestasi tinggi di daerah Bera.",
-                category: "ppd",
-                schoolName: "Pengurusan PPD Bera",
-                date: "12 Okt 2026",
-                src: "https://unsplash.com"
-            },
-            {
-                id: 2,
-                title: "Pertandingan Inovasi & Robotik STEM Daerah",
-                desc: "Pelajar mempamerkan hasil kreativiti teknologi mesra alam dalam karnival anjuran Sektor Pembelajaran.",
-                category: "menengah",
-                schoolName: "SMK Triang",
-                date: "03 Sep 2026",
-                src: "https://unsplash.com"
-            },
-            {
-                id: 3,
-                title: "Sambutan Bulan Kebangsaan & Kibar Jalur Gemilang",
-                desc: "Semangat kemerdekaan jelas terpancar menerusi aktiviti perbarisan dan kibaran bendera oleh murid-murid.",
-                category: "rendah",
-                schoolName: "SK Mengkarak",
-                date: "15 Ogos 2026",
-                src: "https://unsplash.com"
-            }
-        ];
-
-        let currentCategory = 'semua';
-        let searchQuery = '';
-
-        function renderGallery() {
-            const grid = document.getElementById('galleryGrid');
-            const noResult = document.getElementById('noResult');
-            grid.innerHTML = '';
-
-            const filtered = galleryData.filter(item => {
-                const matchCat = currentCategory === 'semua' || item.category === currentCategory;
-                const matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                                    item.schoolName.toLowerCase().includes(searchQuery.toLowerCase());
-                return matchCat && matchSearch;
-            });
-
-            if (filtered.length === 0) {
-                noResult.classList.remove('hidden');
-                return;
-            }
-            noResult.classList.add('hidden');
-
-            filtered.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "group bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between";
-                card.onclick = () => openLightbox(item);
-
-                card.innerHTML = `
-                    <div>
-                        <div class="h-52 overflow-hidden bg-slate-900 relative">
-                            <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
-                        </div>
-                        <div class="p-5">
-                            <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/20">${item.schoolName}</span>
-                            <h3 class="font-bold text-white text-base mt-3 leading-snug group-hover:text-amber-400 transition-colors">${item.title}</h3>
-                            <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">${item.desc}</p>
-                        </div>
-                    </div>
-                    <div class="px-5 pb-5 pt-3 border-t border-slate-900/60 flex justify-between items-center text-[10px] text-slate-500">
-                        <span><i class="far fa-calendar mr-1"></i> ${item.date}</span>
-                        <span class="text-slate-400 group-hover:text-amber-400 font-semibold transition-colors">Buka Foto <i class="fas fa-chevron-right ml-1 text-[8px]"></i></span>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function filterGallery(category) {
-            currentCategory = category;
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => {
+    <main>
+        <div class="filter-container">
+            <button onclick="filterGallery('semua')" class="filter-btn active">Semua Gambar</button>
+            <button onclick="filterGallery('ppd')" class="filter-btn">Aktiviti PPD Bera</button>
