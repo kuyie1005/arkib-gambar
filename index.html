@@ -3,178 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Gambar Rasmi PPD Bera & Sekolah</title>
-    <!-- Memuatkan Tailwind CSS untuk reka bentuk yang moden -->
+    <title>Portal Galeri Foto PPD Bera</title>
     <script src="https://jsdelivr.net"></script>
-    <!-- Memuatkan Font Awesome untuk ikon -->
     <link rel="stylesheet" href="https://cloudflare.com">
-    <style>
-        .gallery-item img {
-            transition: transform 0.3s ease;
-        }
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-slate-900 text-slate-100 font-sans antialiased">
 
-    <!-- NAVIGASI UTAMA -->
-    <nav class="bg-blue-900 text-white shadow-md sticky top-0 z-40">
-        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white p-2 rounded-full w-10 h-10 flex items-center justify-center text-blue-900 font-bold text-lg shadow">
-                    B
-                </div>
-                <div>
-                    <h1 class="font-bold text-base md:text-lg tracking-wide leading-tight">PORTAL GAMBAR RASMI</h1>
-                    <p class="text-xs text-blue-200">PPD Bera & Sekolah-Sekolah Daerah Bera</p>
-                </div>
+    <!-- HEADER / HERO -->
+    <header class="relative bg-slate-950 border-b border-slate-800 py-16 px-6 text-center overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="relative max-w-3xl mx-auto">
+            <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full text-amber-400 text-xs font-semibold mb-4 tracking-wider uppercase">
+                <i class="fas fa-camera"></i> Lensa Digital Pendidikan
             </div>
-            <div class="mt-2 md:mt-0 flex items-center space-x-2 w-full md:w-auto">
-                <div class="relative w-full">
-                    <input type="text" id="searchBar" placeholder="Cari aktiviti atau nama sekolah..." class="w-full bg-blue-800 text-white placeholder-blue-300 text-sm rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    <span class="absolute left-3 top-2.5 text-blue-300 text-sm"><i class="fas fa-search"></i></span>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <header class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white py-12 px-4 shadow-inner text-center">
-        <div class="max-w-3xl mx-auto">
-            <span class="bg-blue-500 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Galeri Media Digital</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold mt-3 leading-tight">Koleksi Lensa Aktiviti PPD Bera</h2>
-            <p class="mt-4 text-blue-100 text-sm md:text-base leading-relaxed">
-                Platform storan dan paparan gambar rasmi bagi program-program anjuran Pejabat Pendidikan Daerah Bera serta aktiviti-aktiviti utama sekolah-sekolah di Daerah Bera.
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight">
+                PORTAL GAMBAR RASMI <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">PPD BERA</span>
+            </h1>
+            <p class="mt-4 text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+                Arkib visual digital memaparkan koleksi foto aktiviti Pejabat Pendidikan Daerah Bera dan sekolah-sekolah cemerlang sekitarnya.
             </p>
         </div>
     </header>
 
-    <!-- UTAMA & PENAPIS (FILTERS) -->
-    <main class="container mx-auto px-4 py-8">
+    <!-- SEARCH & FILTER BAR -->
+    <section class="max-w-6xl mx-auto px-4 mt-8">
+        <div class="bg-slate-950/50 p-4 rounded-2xl border border-slate-800 flex flex-col md:flex-row gap-4 justify-between items-center backdrop-blur-md">
+            
+            <!-- Carian -->
+            <div class="relative w-full md:w-80">
+                <input type="text" id="searchBar" placeholder="Cari program atau sekolah..." class="w-full bg-slate-900 text-slate-200 border border-slate-800 rounded-xl pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:border-amber-500 transition">
+                <i class="fas fa-search absolute left-3.5 top-3.5 text-slate-500 text-xs"></i>
+            </div>
+
+            <!-- Butang Filter Menu -->
+            <div class="flex flex-wrap gap-1.5 w-full md:w-auto" id="filterButtons">
+                <button onclick="filterGallery('semua')" class="filter-btn active bg-amber-500 text-slate-950 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg shadow-amber-500/20 transition cursor-pointer">Semua</button>
+                <button onclick="filterGallery('ppd')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">PPD Bera</button>
+                <button onclick="filterGallery('menengah')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">S. Menengah</button>
+                <button onclick="filterGallery('rendah')" class="filter-btn bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition cursor-pointer">S. Rendah</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN GRID CONTAINER -->
+    <main class="max-w-6xl mx-auto px-4 py-10">
         
-        <!-- Butang Penapis Kategori -->
-        <div class="flex flex-wrap justify-center gap-2 mb-8" id="filterButtons">
-            <button onclick="filterGallery('semua')" class="filter-btn active bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-blue-700 cursor-pointer">
-                Semua Gambar
-            </button>
-            <button onclick="filterGallery('ppd')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
-                Aktiviti PPD Bera
-            </button>
-            <button onclick="filterGallery('menengah')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
-                Sekolah Menengah
-            </button>
-            <button onclick="filterGallery('rendah')" class="filter-btn bg-white text-gray-700 border border-gray-200 px-4 py-2 rounded-full text-sm font-medium shadow-sm transition hover:bg-gray-50 cursor-pointer">
-                Sekolah Rendah
-            </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="galleryGrid">
+            <!-- Gambar akan dijana secara automatik oleh JS -->
         </div>
 
-        <!-- STATS / PANDUAN RINGKAS -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 text-center">
-            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
-                <span class="block text-2xl font-bold text-blue-900" id="countSemua">0</span>
-                <span class="text-xs text-gray-500 uppercase font-medium">Jumlah Gambar</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
-                <span class="block text-2xl font-bold text-indigo-800" id="countPpd">0</span>
-                <span class="text-xs text-gray-500 uppercase font-medium">Program PPD</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
-                <span class="block text-2xl font-bold text-purple-800" id="countMenengah">0</span>
-                <span class="text-xs text-gray-500 uppercase font-medium">Sek. Menengah</span>
-            </div>
-            <div class="bg-white p-4 rounded-xl shadow-xs border border-gray-100">
-                <span class="block text-2xl font-bold text-teal-800" id="countRendah">0</span>
-                <span class="text-xs text-gray-500 uppercase font-medium">Sek. Rendah</span>
-            </div>
-        </div>
-
-        <!-- GRID GALERI GAMBAR -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="galleryGrid">
-            <!-- Gambar akan dimasukkan secara dinamik menggunakan JavaScript di bawah -->
-        </div>
-
-        <!-- Mesej Jika Tiada Carian Ditemui -->
-        <div id="noResult" class="hidden text-center py-12">
-            <i class="fas fa-image text-4xl text-gray-300 mb-3"></i>
-            <p class="text-gray-500">Tiada gambar atau sekolah yang sepadan dengan carian anda.</p>
+        <!-- Tiada Hasil Carian -->
+        <div id="noResult" class="hidden text-center py-20 border border-dashed border-slate-800 rounded-2xl">
+            <i class="fas fa-folder-open text-4xl text-slate-700 mb-3"></i>
+            <p class="text-slate-500 text-sm">Tiada rekod foto atau sekolah yang sepadan ditemui.</p>
         </div>
     </main>
 
-    <!-- LIGHTBOX / MODAL PAPARAN GAMBAR BESAR -->
-    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden flex flex-col justify-center items-center p-4">
-        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 cursor-pointer">
+    <!-- LIGHTBOX / PAPARAN BESAR -->
+    <div id="lightbox" class="fixed inset-0 bg-slate-950/95 z-50 hidden flex flex-col justify-center items-center p-4 backdrop-blur-sm">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-slate-400 hover:text-white text-2xl transition cursor-pointer">
             <i class="fas fa-times"></i>
         </button>
-        <div class="max-w-4xl max-h-[80vh] flex justify-center items-center">
-            <img id="lightboxImg" src="" alt="Paparan Besar" class="max-w-full max-h-[75vh] object-contain rounded shadow-2xl">
+        <div class="max-w-4xl max-h-[75vh]">
+            <img id="lightboxImg" src="" alt="" class="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl border border-slate-800">
         </div>
-        <div class="text-center mt-4 text-white max-w-2xl px-4">
-            <h3 id="lightboxTitle" class="text-lg font-bold"></h3>
-            <p id="lightboxDesc" class="text-sm text-gray-300 mt-1"></p>
-            <div class="mt-3 flex justify-center gap-2">
-                <span id="lightboxTag" class="text-xs bg-blue-600 px-3 py-1 rounded-full"></span>
-                <span id="lightboxDate" class="text-xs bg-gray-700 px-3 py-1 rounded-full text-gray-300"></span>
+        <div class="text-center mt-6 max-w-xl px-4">
+            <span id="lightboxTag" class="text-[10px] bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold px-2.5 py-1 rounded-md uppercase tracking-wider"></span>
+            <h3 id="lightboxTitle" class="text-xl font-bold text-white mt-2"></h3>
+            <p id="lightboxDesc" class="text-xs text-slate-400 mt-2 leading-relaxed"></p>
+            <div class="mt-4 text-[10px] text-slate-500">
+                <i class="far fa-calendar-alt mr-1"></i> Tarikh Program: <span id="lightboxDate" class="text-slate-400"></span>
             </div>
         </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="bg-gray-900 text-gray-400 text-center py-6 mt-12 border-t border-gray-800 text-xs">
-        <p>&copy; 2026 Portal Media Digital PPD Bera. Hak Cipta Terpelihara.</p>
-        <p class="mt-1 text-gray-600">Dikembangkan untuk tujuan pengurusan gambar rasmi dan arkib program pendidikan.</p>
+    <footer class="border-t border-slate-850 bg-slate-950/60 py-8 text-center text-xs text-slate-600">
+        <p>&copy; 2026 Portal Lensa Media PPD Bera. Hak Cipta Terpelihara.</p>
     </footer>
 
-    <!-- JAVASCRIPT: DATA & LOGIK PORTAL -->
+    <!-- JAVASCRIPT LOGIK -->
     <script>
-        // DATA CONTOH: Sila gantikan URL 'src' dengan link gambar sebenar anda
+        // DATA UTAMA GAMBAR (Boleh diubah mengikut keperluan anda)
         const galleryData = [
             {
                 id: 1,
-                title: "KARNIVAL STEM DAERAH BERA 2025",
-                desc: 
+                title: "Majlis Anugerah Kecemerlangan PPD Bera",
+                desc: "Penyerahan sijil dan trofi penghargaan kepada barisan sekolah berprestasi tinggi di daerah Bera.",
                 category: "ppd",
-                schoolName: "PPD Bera",
-                date: "9 Jul 2025",
-                src: "https://photos.app.goo.gl/HMQxfzee19XXu7Qw8"
+                schoolName: "Pengurusan PPD Bera",
+                date: "12 Okt 2026",
+                src: "https://unsplash.com"
             },
             {
                 id: 2,
-                title: "Program Transformasi Minda PPD Bera",
-                desc: "Kursus peningkatan profesionalisme kepimpinan sekolah anjuran Sektor Pengurusan Sekolah.",
-                category: "ppd",
-                schoolName: "PPD Bera",
-                date: "05 Okt 2026",
-                src: "https://unsplash.com"
-            },
-            {
-                id: 3,
-                title: "Karnival Sukan & Kejohanan Olahraga",
-                desc: "Kemeriahan kontinjen atlet SMK Bandar Kerayong semasa acara perbarisan pembukaan kejohanan.",
-                category: "menengah",
-                schoolName: "SMK Bandar Kerayong",
-                date: "28 Sep 2026",
-                src: "https://unsplash.com"
-            },
-            {
-                id: 4,
-                title: "Pelancaran Bulan Kebangsaan Peringkat Sekolah",
-                desc: "Murid-murid SK Mengkarak mengibarkan Jalur Gemilang dengan penuh semangat patriotik.",
-                category: "rendah",
-                schoolName: "SK Mengkarak",
-                date: "15 Ogos 2026",
-                src: "https://unsplash.com"
-            },
-            {
-                id: 5,
-                title: "Projek Inovasi STEM Peringkat Daerah",
-                desc: "Pelajar SMK Triang mempamerkan projek robotik mesra alam kepada barisan panel hakim PPD.",
+                title: "Pertandingan Inovasi & Robotik STEM Daerah",
+                desc: "Pelajar mempamerkan hasil kreativiti teknologi mesra alam dalam karnival anjuran Sektor Pembelajaran.",
                 category: "menengah",
                 schoolName: "SMK Triang",
                 date: "03 Sep 2026",
                 src: "https://unsplash.com"
             },
             {
-                id: 6,
-                title: "Program Jom Ke Sekolah & Amalan Guru Penyayang",
+                id: 3,
+                title: "Sambutan Bulan Kebangsaan & Kibar Jalur Gemilang",
+                desc: "Semangat kemerdekaan jelas terpancar menerusi aktiviti perbarisan dan kibaran bendera oleh murid-murid.",
+                category: "rendah",
+                schoolName: "SK Mengkarak",
+                date: "15 Ogos 2026",
+                src: "https://unsplash.com"
+            }
+        ];
+
+        let currentCategory = 'semua';
+        let searchQuery = '';
+
+        function renderGallery() {
+            const grid = document.getElementById('galleryGrid');
+            const noResult = document.getElementById('noResult');
+            grid.innerHTML = '';
+
+            const filtered = galleryData.filter(item => {
+                const matchCat = currentCategory === 'semua' || item.category === currentCategory;
+                const matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                    item.schoolName.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                noResult.classList.remove('hidden');
+                return;
+            }
+            noResult.classList.add('hidden');
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "group bg-slate-950 border border-slate-850 hover:border-slate-700 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between";
+                card.onclick = () => openLightbox(item);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="h-52 overflow-hidden bg-slate-900 relative">
+                            <img src="${item.src}" alt="${item.title}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100">
+                        </div>
+                        <div class="p-5">
+                            <span class="text-[10px] font-bold tracking-widest text-amber-400 uppercase bg-amber-500/5 px-2 py-0.5 rounded border border-amber-500/20">${item.schoolName}</span>
+                            <h3 class="font-bold text-white text-base mt-3 leading-snug group-hover:text-amber-400 transition-colors">${item.title}</h3>
+                            <p class="text-xs text-slate-400 mt-2 line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-5 pb-5 pt-3 border-t border-slate-900/60 flex justify-between items-center text-[10px] text-slate-500">
+                        <span><i class="far fa-calendar mr-1"></i> ${item.date}</span>
+                        <span class="text-slate-400 group-hover:text-amber-400 font-semibold transition-colors">Buka Foto <i class="fas fa-chevron-right ml-1 text-[8px]"></i></span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterGallery(category) {
+            currentCategory = category;
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
